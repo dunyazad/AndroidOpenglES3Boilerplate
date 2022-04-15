@@ -6,6 +6,7 @@ public class OpenGLES3JNILibrary {
     }
 
     public static native void initialize();
+    public static native void terminate();
     public static native void resize(int width, int height);
     public static native void frame();
 }
