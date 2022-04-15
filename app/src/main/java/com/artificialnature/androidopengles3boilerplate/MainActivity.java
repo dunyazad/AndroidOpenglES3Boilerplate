@@ -9,10 +9,7 @@ import com.artificialnature.androidopengles3boilerplate.databinding.ActivityMain
 
 public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'androidopengles3boilerplate' library on application startup.
-    static {
-        System.loadLibrary("androidopengles3boilerplate");
-    }
+    OpenGLES3View mView;
 
     private ActivityMainBinding binding;
 
@@ -20,17 +17,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        // Example of a call to a native method
-        TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI());
+        mView = new OpenGLES3View(getApplication());
+        setContentView(mView);
     }
 
-    /**
-     * A native method that is implemented by the 'androidopengles3boilerplate' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+    @Override protected void onPause() {
+        super.onPause();
+        mView.onPause();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        mView.onResume();
+    }
 }
